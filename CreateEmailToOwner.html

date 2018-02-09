@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+    <?!= include('css') ?>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css">
+        <?!= include('chosen.min.css') ?>
+</head>
+
+<body>
+    <div class="sidebar branding-below">
+        <h2 style="text-align: center;"> Create Post Email to Owner</h2>
+        <br/>
+        <a href="#" class="brand-logo center">
+            <img class="loading_spinner" src="https://sites.google.com/a/southwestsoftwaredesigns.com/southwest-software-designs/drive_loading_gif.gif?attredirects=0&d=1">
+        </a>
+        <form>
+            <div class="block ">
+                <label for="subject_textarea"><b>Email Subject:</b></label>
+                <!--<input id="field1" />-->
+                <div class="form-group">
+                    <textarea id="subject_textarea" rows="3" maxlength="124"></textarea>
+                </div>
+                <span id="remainingCharSub" style="float: right;"></span>
+                <br>
+            </div>
+            <div class="block ">
+                <label for="sampleTextArea"><b>Email Body:</b></label>
+                <div class="form-group">
+                    <textarea id="sampleTextArea" rows="3" maxlength="124"></textarea>
+                </div>
+                <span id="remainingChar" style="float: right;"></span>
+            </div>
+            <div class="block">
+                <label for="field_to"><b>To Email(s):</b></label>
+                <input id="field_to" style="float: inherit;" placeholder="unique@to.bufferapp.com" />
+            </div>
+            <div class="block" style="margin-top: 30px;">
+                <label for="label_multi"><b>Playlist(s):</b></label>
+                <!-- <input id="field3" /> -->
+                <select id="label_multi" data-placeholder="" style="width:100%;" class="chosen-select"  multiple>
+                    <option value=""></option>
+                </select>
+            </div>
+ 
+            <div class="block ">
+                <span style="display:block;"><b>Image Attachment:</b></span>
+                <div id="attachment" style="margin-bottom:10px;">
+                    <input type="file" id="myFiles" name="myFiles" />
+                    <!-- <input id="save_file_btn" type="button" value="Upload" onclick="SaveFiles() " /> -->
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- The actual snackbar -->
+    <div id="snackbar">Some text some message..</div>
+    <div class="sidebar bottom">
+        <div class="buttons-form" id="button-bar">
+            <button class="blue" id="save_draft">Save</button>
+            <button class="green" id="save_new_draft">Save & New</button>
+            <button id="cancel_draft" onclick="resetFormFields()">Clear</button>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.js"></script>
+    <?!= include( 'chosen.jquery.min.js' ) ?>
+        <?!= include( 'script_create_owner' ) ?>
+</body>
+
+</html>

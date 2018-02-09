@@ -1,0 +1,148 @@
+<script>
+$(function() {
+
+    $("#label_multi").chosen({});
+    getDraftLabels();
+    localStorage.removeItem("bulkAttachId");
+});
+
+$('#field1').keydown(function(e) {
+    //console.log(e.which);
+    $("#remainingCharSub1").html("Characters : " + (this.value.length + 1));
+});
+
+$('#sampleTextAreaBulk').keydown(function(e) {
+    //console.log(e.which);
+    $("#remainingCharSub").html("Characters : " + (this.value.length + 1));
+});
+
+
+$('#clear_btn').on('click', function() {
+    $('#field1').val('');
+    $("#label_multi").val('').trigger("chosen:updated");
+    $('#sampleTextAreaBulk').val('');
+    $('#remainingCharSub').html("Characters : 0");
+});
+
+$('#save_btn').on('click', function() {
+    SaveFiles();
+
+});
+
+var reader = new FileReader();
+var files;
+var fileCounter = 0;
+reader.onloadend = function() {
+
+    var folderName = '[Repeat Post Uploads]';
+    var storageId = localStorage.getItem("bulkAttachId") || "";
+    var userObj = {
+        addToSub: $('#field1').val() ? $('#field1').val() : null,
+        addToBody: $('#sampleTextAreaBulk').val() ? $('#sampleTextAreaBulk').val().split('\n').join('<br />') : null,
+        addToLabel: $('#label_multi').chosen().val() ? $('#label_multi').chosen().val() : null,
+        attachment: storageId
+    };
+    if(storageId){
+         google.script.run
+         .withSuccessHandler()
+         .shareFileWithOwner( storageId );
+     }
+    google.script.run
+        .withFailureHandler(function(err) {
+            showToast(err);
+        }).withSuccessHandler(function(file_id) {
+
+            showToast('Upload complete!');
+            fileCounter++;
+            postNextFile();
+            $('.loading_spinner').hide('slow');
+            google.script.host.close();
+        }).saveBulkEmailToDocProps( {
+           "result": reader.result,
+           "file_name": files[fileCounter].name,
+           "folder_name": folderName,
+           "userObj": userObj
+        } )
+//        .saveFileCsv(reader.result, files[fileCounter].name, folderName, userObj);
+}
+
+function SaveFiles() {
+    if ($('#myFiles').val() == "") {
+        showToast('Please Upload your template!');
+        return 0;
+    }
+    $('.loading_spinner').show();
+    var folderSelect = document.getElementById("folderSelectId");
+    files = document.getElementById("myFiles").files;
+    postNextFile();
+}
+
+function postNextFile() {
+    if (fileCounter < files.length) {
+        reader.readAsDataURL(files[fileCounter]);
+    } else {
+        fileCounter = 0;
+        $('#myFiles').val('');
+    }
+}
+
+function getDraftLabels() {
+    google.script.run
+        .withSuccessHandler(function(names) {
+            console.log(names);
+            $('#label_multi').html('');
+            for (var i = 0; i < names.length; i++) {
+                $('#label_multi').append("<option value='" + names[i] + "'>" + names[i] + "</option>");
+            }
+            $('#label_multi').trigger("chosen:updated");
+        })
+        .withFailureHandler(showError)
+        .getAllGmailLabelsFromOwner();
+}
+
+/**
+ * Inserts a div that contains an error message after a given element.
+ *
+ * @param msg The error message to display.
+ * @param element The element after which to display the error.
+ */
+function showError(msg, element) {
+    console.log(msg);
+    var div = $('<div id="error" class="error">' + msg + '</div>');
+    $(element).after(div);
+}
+
+function showToast(msg) {
+    // Get the snackbar DIV
+    var x = $('#snackbar'); //document.getElementById("snackbar")
+    // Add the "show" class to DIV
+    $('#snackbar').html(msg);
+    $('#snackbar').addClass('show');
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() {
+        $('#snackbar').removeClass('show');
+        $('#snackbar').html('');
+    }, 3000);
+}
+
+ function readURL(input) {
+     var folderName = '[Repeat Post Uploads]';
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
+         files = input.files[0];
+         reader.onloadend = function(e) {
+             google.script.run
+                 .withSuccessHandler(function(file_id) {
+                     localStorage.setItem("bulkAttachId", file_id);
+                     showToast('Upload complete!');
+                     $('.loading_spinner').hide('slow');
+ 
+                 }).saveFile(e.target.result, files.name, folderName);
+            
+         };
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+
+</script>

@@ -1,0 +1,266 @@
+<style>
+button {
+    cursor: pointer;
+}
+
+.branding-below {
+    bottom: 56px;
+    top: 0;
+}
+
+.branding-text {
+    left: 7px;
+    position: relative;
+    top: 3px;
+}
+
+.col-contain {
+    overflow: hidden;
+}
+
+.col-one {
+    float: left;
+    width: 50%;
+}
+
+.logo {
+    vertical-align: middle;
+}
+
+.radio-spacer {
+    height: 20px;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+input,
+label {
+    display: block;
+}
+
+.block {
+    margin-bottom: 15px;
+}
+
+span {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.checkbox_days {
+    margin-top: 15px;
+}
+
+.checkbox_days > label {
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+}
+
+input[type="radio"] {
+    float: left;
+}
+
+.chkbox {
+    padding-left: 6px;
+    font-weight: bold;
+}
+
+#input_days {
+    float: none;
+    width: 40%;
+}
+
+#field_label {
+    width: 60%;
+}
+
+.radio_grp {
+    margin-bottom: 10px;
+}
+
+.buttons-form {
+    margin-top: 100px;
+}
+
+input#input_timepicker {
+    float: left;
+    width: 30%;
+}
+
+input#input_timepicker1 {
+    float: right;
+    width: 30%;
+}
+
+input#input_numberpicker {
+    width: auto;
+    float: inherit;
+}
+
+input#datepicker2 {
+    width: 25%;
+}
+
+#button-bar {
+    margin-top: 20px;
+}
+
+.buttonPlaceholder {
+    min-height: 70px;
+}
+
+.buttonWrapper {
+    background-color: #4d4d4d;
+    min-width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 20px;
+}
+
+#myFiles {
+    float: left;
+    width:175px;
+    cursor: pointer;
+}
+
+#save_file_btn {
+    margin-top: -25px;
+    cursor: pointer;
+}
+
+#sampleTextArea {
+    width: 95%;
+    height: 86px;
+}
+
+#sampleTextAreaBulk {
+    width: 95%;
+    height: 65px;
+}
+
+#subject_textarea{
+    width: 95%;
+    height: 86px; 
+}
+
+#field1 {
+    width: 95%;
+    height: 65px; 
+}
+.sidebar.bottom span {
+    position: absolute;
+    bottom: 20px;
+    margin-left: 22px;
+}
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+
+#snackbar {
+    visibility: hidden;
+    /* Hidden by default. Visible on click */
+    min-width: 250px;
+    /* Set a default minimum width */
+    margin-left: -125px;
+    /* Divide value of min-width by 2 */
+    background-color: #333;
+    /* Black background color */
+    color: #fff;
+    /* White text color */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    padding: 16px;
+    /* Padding */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 1;
+    /* Add a z-index if needed */
+    left: 46%;
+    /* Center the snackbar */
+    bottom: 50px;
+    /* 30px from the bottom */
+}
+
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+
+#snackbar.show {
+    visibility: visible;
+    /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/* Animations to fade the snackbar in and out */
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 50px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 50px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+:required {
+    border-color: red !important;
+}
+
+.loading_spinner{
+    display: none;
+    position: absolute;
+    width: 77px;
+    height: 77px;
+    left: 110px;
+    top: 45%; /*top: 30px;*/
+}
+
+#trash_btn {
+    position: absolute;
+    right: 2px;
+}
+</style>

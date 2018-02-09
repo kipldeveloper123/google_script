@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+      <script src="jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+/*
+var to = "testing@testing.com, testing.testing1.com,";
+
+var to_array = to.split(',');
+
+
+for(var i =0; i < to_array.length; i++){
+
+	if(to_array[i] != ''){
+		console.log(i);
+		console.log(to_array[i].trim());
+	}
+}
+*/
+</script>
+
+  </head>
+  <body>
+    <canvas id="myCanvas" width="650" height="630" ></canvas>
+    <img id="previewImg" src="download.png" />
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      imageObj.onload = function() {
+        // draw cropped image
+        var sourceX = 450;
+        var sourceY = 0;
+        var sourceWidth = 1352;
+        var sourceHeight = 1250;
+        var destWidth = 1400;
+        var destHeight = 740;
+        var destX = 0;
+        var destY = 0;
+        //alert(destX+' '+destY);
+
+        //context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+        context.drawImage(imageObj, 340, 0, 650, 630, 0, 0, 650, 630);
+        //alert(canvas.toDataURL({format: "png",'multiplier':2}));
+        $('#previewImg').attr('src', canvas.toDataURL({format: "png",'multiplier':2}));
+
+      };
+      imageObj.src = 'download.png';
+    </script>
+
+    
+
+  </body>
+</html> 

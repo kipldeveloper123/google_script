@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    /*custom font*/
+    
+    @import url(https://fonts.googleapis.com/css?family=Montserrat);
+    /*basic reset*/
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html {
+        height: 100%;
+    }
+    
+    body {
+        font-family: montserrat, arial, verdana;
+    }
+    
+    .activation_input {
+        text-align: center;
+    }
+    
+    .activation_input label {
+        margin-bottom: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar branding-below">
+        <h2> Upgrade </h2>
+        <br/>
+        <p> To upgrade, purchase an activation key from <u><a href="http://www.repeatpost.com" target="_blank"> repeatpost.com </a></u> and enter it below. See <u>upgrade details </u> to learn more. </p>
+        <br/>
+        <div class="activation_input">
+            <label for="field_activation">
+                <h2> Enter Activation Key </h2></label>
+            <br/>
+            <input id="field_activation" style="float: inherit;" />
+        </div>
+        <button class="blue" id="save_license" style="margin-left: 200px; margin-top: 18px;">Submit</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    $(function() {
+
+    });
+
+
+    $("#save_license").click(function(e) {
+        var licenseKey = $('#field_activation').val();
+        if (licenseKey != '') {
+            google.script.run
+                .withFailureHandler()
+                .withSuccessHandler(function(data) {
+                    console.log(data);
+                    //google.script.host.close();
+                    google.script.run
+                        .withFailureHandler()
+                        .withSuccessHandler()
+                        .successModal();
+                }).checkLicense(licenseKey)
+        }
+        return false;
+    })
+
+    function successModal() {
+
+
+    }
+    </script>
+</body>
+
+</html>
